@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "941225104721",
+    "project_id": "rewind-d7038",
+    "storage_bucket": "rewind-d7038.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941225104721:android:bb4d594dc009c825e12f70",
+        "android_client_info": {
+          "package_name": "com.project.rewind"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "941225104721-leu2pa7ggtf1ct6ckqo2np2k2icnuapb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJVV0t8pYA8gRjeMI0lT38aocAOdomNvk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "941225104721-leu2pa7ggtf1ct6ckqo2np2k2icnuapb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
