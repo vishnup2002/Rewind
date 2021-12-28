@@ -134,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
             print('error signing in');
           } else {
             print('signed in');
-            print(result);
+            print(result.uid);
           }
         },
         padding: EdgeInsets.all(15.0),
