@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rewind/loginscreen.dart';
+import 'package:rewind/screens/wrapper.dart';
 
 //import 'package:rewind/splash.dart';
-
-
 
 void main() => runApp(MyApp());
 
@@ -14,10 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Rewind',
       debugShowCheckedModeBanner: false,
-      home: Center(
-        child: LoginScreen(),
-      ),
-
+      home: Wrapper(),
     );
   }
 }
