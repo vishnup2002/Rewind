@@ -1,6 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rewind/screens/homescreen.dart';
 import 'package:rewind/utilities/constants.dart';
+
+import 'signup_Screen.dart';
+
+TextEditingController _passwordTextController = TextEditingController();
+TextEditingController _emailTextController = TextEditingController();
+TextEditingController _userNameTextController = TextEditingController();
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -26,6 +34,7 @@ class _SignInScreenState extends State<SignInScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
+            controller: _emailTextController,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.white,
@@ -61,6 +70,7 @@ class _SignInScreenState extends State<SignInScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
+            controller: _passwordTextController,
             obscureText: true,
             style: TextStyle(
               color: Colors.white,
@@ -88,7 +98,19 @@ class _SignInScreenState extends State<SignInScreen> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () {
+          FirebaseAuth.instance
+              .signInWithEmailAndPassword(
+                  email: _emailTextController.text,
+                  password: _passwordTextController.text)
+              .then((value) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          }).onError((error, stackTrace) {
+            print("Error ${error.toString()}");
+            showAlertDialog(context);
+          });
+        },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -185,6 +207,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       //_buildForgotPasswordBtn(),
                       //_buildRememberMeCheckbox(),
                       _buildLoginBtn(),
+                      signUpOption(),
                       //_buildSignInWithText(),
                       //_buildSocialBtnRow(),
                       // _buildSignupBtn(),
@@ -196,6 +219,53 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Row signUpOption() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text("Don't have account?",
+            style: TextStyle(color: Colors.white70)),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => SignUpScreen()));
+          },
+          child: const Text(
+            " Sign Up",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+        )
+      ],
+    );
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Invalid Credentials"),
+      content: Text("Invalid username/password"),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
