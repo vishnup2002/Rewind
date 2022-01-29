@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:rewind/loginscreen.dart';
 import 'package:rewind/screens/signin_screen.dart';
 
 //import 'package:rewind/splash.dart';
