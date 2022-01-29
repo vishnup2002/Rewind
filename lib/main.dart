@@ -1,11 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:rewind/loginscreen.dart';
+import 'package:rewind/screens/signin_screen.dart';
 
 //import 'package:rewind/splash.dart';
 
-
-
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -13,11 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Rewind',
+      theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
-      home: Center(
-        child: LoginScreen(),
-      ),
-
+      home: SignInScreen(),
     );
   }
 }

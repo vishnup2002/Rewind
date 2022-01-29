@@ -1,13 +1,24 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rewind/screens/homescreen.dart';
 import 'package:rewind/utilities/constants.dart';
-class LoginScreen extends StatefulWidget {
+
+import 'signup_Screen.dart';
+
+TextEditingController _passwordTextController = TextEditingController();
+TextEditingController _emailTextController = TextEditingController();
+TextEditingController _userNameTextController = TextEditingController();
+
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({Key? key}) : super(key: key);
+
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _SignInScreenState createState() => _SignInScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  //bool _rememberMe = false;
+class _SignInScreenState extends State<SignInScreen> {
+  bool _rememberMe = false;
 
   Widget _buildEmailTF() {
     return Column(
@@ -23,6 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
+            controller: _emailTextController,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.white,
@@ -58,6 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
+            controller: _passwordTextController,
             obscureText: true,
             style: TextStyle(
               color: Colors.white,
@@ -79,54 +92,25 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  /*Widget _buildForgotPasswordBtn() {
-    return Container(
-      alignment: Alignment.centerRight,
-      child: FlatButton(
-        onPressed: () => print('Forgot Password Button Pressed'),
-        padding: EdgeInsets.only(right: 0.0),
-        child: Text(
-          'Forgot Password?',
-          style: kLabelStyle,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildRememberMeCheckbox() {
-    return Container(
-      height: 20.0,
-      child: Row(
-        children: <Widget>[
-          Theme(
-            data: ThemeData(unselectedWidgetColor: Colors.white),
-            child: Checkbox(
-              value: _rememberMe,
-              checkColor: Colors.green,
-              activeColor: Colors.white,
-              onChanged: (value) {
-                setState(() {
-                  _rememberMe = value;
-                });
-              },
-            ),
-          ),
-          Text(
-            'Remember me',
-            style: kLabelStyle,
-          ),
-        ],
-      ),
-    );
-  }
-*/
   Widget _buildLoginBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: RaisedButton(
         elevation: 5.0,
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () {
+          FirebaseAuth.instance
+              .signInWithEmailAndPassword(
+                  email: _emailTextController.text,
+                  password: _passwordTextController.text)
+              .then((value) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomeScreen()));
+          }).onError((error, stackTrace) {
+            print("Error ${error.toString()}");
+            showAlertDialog(context);
+          });
+        },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -146,100 +130,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  /*Widget _buildSignInWithText() {
-    return Column(
-      children: <Widget>[
-        Text(
-          '- OR -',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        SizedBox(height: 20.0),
-        Text(
-          'Sign in with',
-          style: kLabelStyle,
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSocialBtn(Function onTap, AssetImage logo) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        height: 60.0,
-        width: 60.0,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(0, 2),
-              blurRadius: 6.0,
-            ),
-          ],
-          image: DecorationImage(
-            image: logo,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSocialBtnRow() {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 30.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          _buildSocialBtn(
-            () => print('Login with Facebook'),
-            AssetImage(
-              'assets/logos/facebook.jpg',
-            ),
-          ),
-          _buildSocialBtn(
-            () => print('Login with Google'),
-            AssetImage(
-              'assets/logos/google.jpg',
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSignupBtn() {
-    return GestureDetector(
-      onTap: () => print('Sign Up Button Pressed'),
-      child: RichText(
-        text: TextSpan(
-          children: [
-            TextSpan(
-              text: 'Don\'t have an Account? ',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            TextSpan(
-              text: 'Sign Up',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -266,8 +156,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-             Center(
-               child:Container(
+              Center(
+                  child: Container(
                 height: double.infinity,
                 child: SingleChildScrollView(
                   physics: AlwaysScrollableScrollPhysics(),
@@ -276,28 +166,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     vertical: 120.0,
                   ),
                   child: Column(
-
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                    Text(
-                    'Rewind',
-                    style: TextStyle(
-                      color: Colors.green,
-                      fontFamily: 'OpenSans',
-                      fontSize: 30.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    ),
-                    Container(
-                      child: Image(image: AssetImage('lib/utilities/r.jpg'),
-                        height: 200.0,
-                        width: 300.0,
-                       /*child: BoxDecoration(
+                      Text(
+                        'Rewind',
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontFamily: 'OpenSans',
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Container(
+                        child: Image(
+                          image: AssetImage('lib/utilities/r.jpg'),
+                          height: 200.0,
+                          width: 300.0,
+                          /*child: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white,
                         ),*/
+                        ),
                       ),
-                    ),
 
                       Text(
                         'Sign In',
@@ -317,18 +207,65 @@ class _LoginScreenState extends State<LoginScreen> {
                       //_buildForgotPasswordBtn(),
                       //_buildRememberMeCheckbox(),
                       _buildLoginBtn(),
+                      signUpOption(),
                       //_buildSignInWithText(),
                       //_buildSocialBtnRow(),
                       // _buildSignupBtn(),
                     ],
                   ),
                 ),
-              )
-             ),
-          ],
+              )),
+            ],
           ),
         ),
       ),
+    );
+  }
+
+  Row signUpOption() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text("Don't have account?",
+            style: TextStyle(color: Colors.white70)),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => SignUpScreen()));
+          },
+          child: const Text(
+            " Sign Up",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+        )
+      ],
+    );
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Invalid Credentials"),
+      content: Text("Invalid username/password"),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
