@@ -54,7 +54,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Blog App"),
+        title: Text("Rewind Community"),
       ),
       body: Container(
           child: blogSnapshot != null
@@ -84,34 +84,83 @@ class BlogTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 24, right: 16, left: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(8)),
-              child: Image.network(
-                imgUrl,
-                width: MediaQuery.of(context).size.width,
-                fit: BoxFit.cover,
-                height: 200,
+    if (imgUrl != "n") {
+      return Container(
+        margin: EdgeInsets.only(bottom: 24, right: 16, left: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(8)),
+                child: Image.network(
+                  imgUrl,
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.cover,
+                  height: 200,
+                ),
               ),
             ),
-          ),
-          SizedBox(height: 16),
-          Text(
-            title,
-            style: TextStyle(fontSize: 17),
-          ),
-          SizedBox(height: 2),
-          Text(
-            '$desc - By $author',
-            style: TextStyle(fontSize: 14),
-          )
-        ],
-      ),
-    );
+            SizedBox(height: 16),
+            Text(
+              title,
+              style: TextStyle(fontSize: 17),
+            ),
+            SizedBox(height: 2),
+            Text(
+              '$desc - By $author',
+              style: TextStyle(fontSize: 14),
+            )
+          ],
+        ),
+      );
+    } else {
+      return Container(
+        margin: EdgeInsets.only(bottom: 24, right: 16, left: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: TextStyle(fontSize: 17),
+            ),
+            SizedBox(height: 2),
+            Text(
+              '$desc - By $author',
+              style: TextStyle(fontSize: 14),
+            )
+          ],
+        ),
+      );
+    }
+    // return Container(
+    //   margin: EdgeInsets.only(bottom: 24, right: 16, left: 16),
+    //   child: Column(
+    //     crossAxisAlignment: CrossAxisAlignment.start,
+    //     children: [
+    //       Container(
+    //         child: ClipRRect(
+    //           borderRadius: BorderRadius.all(Radius.circular(8)),
+    //           child: Image.network(
+    //             imgUrl,
+    //             width: MediaQuery.of(context).size.width,
+    //             fit: BoxFit.cover,
+    //             height: 200,
+    //           ),
+    //         ),
+    //       ),
+    //       SizedBox(height: 16),
+    //       Text(
+    //         title,
+    //         style: TextStyle(fontSize: 17),
+    //       ),
+    //       SizedBox(height: 2),
+    //       Text(
+    //         '$desc - By $author',
+    //         style: TextStyle(fontSize: 14),
+    //       )
+    //     ],
+    //   ),
+    // );
   }
 }

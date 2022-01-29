@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -76,6 +77,20 @@ class _CreatePostState extends State<CreatePost> {
       });
 
       // upload the blog info
+    } else {
+      Map<String, dynamic> blogData = {
+        "imgUrl": "n",
+        "author": authorTextEditingController.text,
+        "title": titleTextEditingController.text,
+        "desc": descTextEditingController.text
+      };
+
+      crudMethods.addData(blogData).then((value) {
+        setState(() {
+          isLoading = false;
+        });
+        Navigator.pop(context);
+      });
     }
   }
 
@@ -90,10 +105,11 @@ class _CreatePostState extends State<CreatePost> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Create Blog"),
+        title: Text("Create Post"),
         actions: [
           GestureDetector(
             onTap: () {
+              print("clicked");
               uploadBlog();
             },
             child: Padding(
@@ -155,7 +171,7 @@ class _CreatePostState extends State<CreatePost> {
                       TextField(
                         controller: authorTextEditingController,
                         decoration:
-                            InputDecoration(hintText: "enter author name"),
+                            InputDecoration(hintText: "enter your name"),
                       ),
                     ],
                   )),
