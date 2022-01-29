@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Rewind',
+      theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       home: SignInScreen(),
     );
