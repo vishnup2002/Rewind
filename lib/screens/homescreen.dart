@@ -1,3 +1,4 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rewind/utils/color_utils.dart';
@@ -21,14 +22,14 @@ class _HomeScreenState extends State<HomeScreen> {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
-          hexStringToColor("28313b"),
-          hexStringToColor("485461"),
+          hexStringToColor("00FF00"),
+          hexStringToColor("013220"),
           // hexStringToColor("5E61F4")
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.fromLTRB(
-                20, MediaQuery.of(context).size.height * 0.2, 20, 0),
+                20, MediaQuery.of(context).size.height * 0.2, 20, 0,),
             child: Column(
               children: <Widget>[
                 ElevatedButton(

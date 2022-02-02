@@ -25,7 +25,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.lightGreen[800],
         elevation: 0,
         title: const Text(
           "Sign Up",
@@ -37,8 +37,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
               gradient: LinearGradient(colors: [
-            hexStringToColor("28313b"),
-            hexStringToColor("485461"),
+            hexStringToColor("00FF00"),
+            hexStringToColor("013220"),
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
           child: SingleChildScrollView(
               child: Padding(
