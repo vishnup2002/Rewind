@@ -74,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 30,
                 ),
                 ElevatedButton(
-                  child: Text("Contact Thanal"),
+                  child: Text("Contact "),
                   onPressed: () {},
                 ),
                 SizedBox(

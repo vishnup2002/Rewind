@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:random_string/random_string.dart';
 import 'package:rewind/services/crud.dart';
+import 'package:rewind/utils/color_utils.dart';
 
 class CreatePost extends StatefulWidget {
   const CreatePost({Key? key}) : super(key: key);
@@ -104,7 +105,9 @@ class _CreatePostState extends State<CreatePost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green[900],
       appBar: AppBar(
+        backgroundColor: Colors.lightGreen[800],
         title: Text("Create Post"),
         actions: [
           GestureDetector(
@@ -120,11 +123,13 @@ class _CreatePostState extends State<CreatePost> {
       ),
       body: isLoading
           ? Container(
+
               child: Center(
               child: CircularProgressIndicator(),
             ))
           : SingleChildScrollView(
               child: Container(
+
                   margin: EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
                     children: [
@@ -134,6 +139,7 @@ class _CreatePostState extends State<CreatePost> {
                         },
                         child: selectedImage != null
                             ? Container(
+
                                 height: 150,
                                 margin: EdgeInsets.symmetric(vertical: 24),
                                 width: MediaQuery.of(context).size.width,
@@ -149,7 +155,7 @@ class _CreatePostState extends State<CreatePost> {
                             : Container(
                                 height: 150,
                                 decoration: BoxDecoration(
-                                    color: Colors.grey,
+                                    color: Colors.lightGreen,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(8))),
                                 margin: EdgeInsets.symmetric(vertical: 24),

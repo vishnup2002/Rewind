@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:rewind/screens/create_post.dart';
 import 'package:rewind/services/crud.dart';
+import 'package:rewind/utils/color_utils.dart';
 
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({Key? key}) : super(key: key);
@@ -54,9 +55,15 @@ class _CommunityScreenState extends State<CommunityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.lightGreen[800],
         title: Text("Rewind Community"),
       ),
       body: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(colors: [
+                hexStringToColor("013220"),
+               hexStringToColor("00FF00"),
+              ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
           child: blogSnapshot != null
               ? blogsList()
               : Container(
