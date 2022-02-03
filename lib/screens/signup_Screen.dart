@@ -38,7 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           decoration: BoxDecoration(
               gradient: LinearGradient(colors: [
             hexStringToColor("013220"),
-            hexStringToColor("00FF00"),
+            hexStringToColor("00A300"),
           ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
           child: SingleChildScrollView(
               child: Padding(

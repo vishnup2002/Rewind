@@ -111,12 +111,13 @@ class BlogTile extends StatelessWidget {
             SizedBox(height: 16),
             Text(
               title,
-              style: TextStyle(fontSize: 17),
+              style: TextStyle(fontSize: 23),
             ),
             SizedBox(height: 2),
             Text(
-              '$desc - By $author',
-              style: TextStyle(fontSize: 14),
+              '$desc\n\t'
+                  ' \t - By $author',
+              style: TextStyle(fontSize: 20),
             )
           ],
         ),
